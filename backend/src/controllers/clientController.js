@@ -18,5 +18,10 @@ exports.addClient = (req, res) => {
   fs.writeFileSync(dbFile, JSON.stringify(data, null, 2));
   res.status(201).json(newClient);
 };
+exports.updateClient = (req, res) => {
+  res.send('updateClient placeholder');
+};
 
-// TODO: updateClient, deleteClient
+exports.deleteClient = (req, res) => {
+  res.send('deleteClient placeholder');
+};
