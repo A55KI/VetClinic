@@ -1,12 +1,14 @@
 const express = require('express');
 const app = express();
-const clientRoutes = require('./routes/clientRoutes');
-const errorHandler = require('./middleware/errorHandler');
 
 app.use(express.json());
-app.use('/api/clients', clientRoutes);
-app.use(errorHandler);
+app.use('/clients', require('./routes/clientRoutes'));
 
-app.listen(3001, () => {
-  console.log('Backend running on http://localhost:3001');
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ error: 'Internal Server Error' });
 });
+
+app.listen(3000, () =>
+  console.log('Server running on http://localhost:3000')
+);
