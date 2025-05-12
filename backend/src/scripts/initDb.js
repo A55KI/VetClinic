@@ -2,14 +2,17 @@ const fs = require('fs');
 const path = require('path');
 const Database = require('better-sqlite3');
 
-const dbDir = path.join(__dirname, '../src/data/db.js');
-if (!fs.existsSync(vetclinic.db)) {
-  fs.mkdirSync(vetclinic.db, { recursive: true });
+// katalog: backend/src/data
+const dbDir = path.join(__dirname, '../data');
+if (!fs.existsSync(dbDir)) {
+  fs.mkdirSync(dbDir, { recursive: true });
 }
 
-const dbPath = path.join(dbDir, 'db.js');
+// plik bazy
+const dbPath = path.join(dbDir, 'vetclinic.db');
 const db = new Database(dbPath);
 
+// schema – tabela clients
 db.exec(`
 CREATE TABLE IF NOT EXISTS clients (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -21,5 +24,4 @@ CREATE TABLE IF NOT EXISTS clients (
 `);
 
 console.log('✓ Database schema initialized at', dbPath);
-
 db.close();
